@@ -46,3 +46,7 @@ it('adds +39 prefix to number starting with 0039', function () {
     // 0039 is a common alternate Italian prefix format - it gets +39 prepended
     expect(PhoneNumberFormatter::format('00393331234567'))->toBe('+3900393331234567');
 });
+
+it('only adds + if number begins with prefix', function () {
+    expect(PhoneNumberFormatter::format('393331234567'))->toBe('+393331234567');
+});
