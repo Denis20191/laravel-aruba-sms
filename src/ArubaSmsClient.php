@@ -53,6 +53,10 @@ class ArubaSmsClient
         if ($status === 200) {
             $values = explode(';', $response->body());
 
+            if (count($values) < 2) {
+                throw new ArubaSmsAuthException;
+    }
+
             $this->setHeader($values[0], $values[1]);
 
             return (object) [

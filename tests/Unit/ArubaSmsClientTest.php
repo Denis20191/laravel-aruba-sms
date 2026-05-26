@@ -453,3 +453,12 @@ it('logs multiple recipients in sandbox mode', function () {
 
     expect($result)->toBeNull();
 });
+
+it('throws on malformed auth response without semicolon', function () {
+    Http::fake([
+        '*/login' => Http::response('onlyone', 200),
+    ]);
+
+    $client = new ArubaSmsClient;
+    $client->auth();
+})->throws(ArubaSmsAuthException::class);

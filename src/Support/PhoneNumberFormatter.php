@@ -18,8 +18,11 @@ class PhoneNumberFormatter
             return '';
         }
 
-        if (! str_starts_with($phoneNumber, '+')) {
+        if (! str_starts_with($phoneNumber, '+') && strlen($phoneNumber) === 10) {
             $phoneNumber = '+39'.$phoneNumber;
+        }
+        elseif(strlen($phoneNumber) === 12) {
+            $phoneNumber = '+'.$phoneNumber;
         }
 
         return $phoneNumber;

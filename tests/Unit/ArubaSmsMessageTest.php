@@ -107,3 +107,9 @@ it('constructor with empty array recipients', function () {
     expect($message->getRecipient())->toBe('')
         ->and($message->getRecipients())->toBe([]);
 });
+
+it('overrides content after initial assignment', function() {
+    $message = new ArubaSmsMessage('Hello', '+393331234567', 'N');
+    $message->content('');
+    expect($message->getContent())->toBe('');
+});
