@@ -18,6 +18,10 @@ class PhoneNumberFormatter
             return '';
         }
 
+        if(str_starts_with($phoneNumber, '00')) {
+            $phoneNumber = str_replace('00', '+', $phoneNumber);
+        }
+
         if(str_starts_with($phoneNumber, '39')) {
             $phoneNumber = '+'.$phoneNumber;
         }
@@ -34,6 +38,9 @@ class PhoneNumberFormatter
      */
     public static function stripSpaces(string $phoneNumber): string
     {
-        return str_replace(' ', '', $phoneNumber);
+        $phoneNumber = str_replace(' ', '', $phoneNumber);
+        $phoneNumber = str_replace("\t", '', $phoneNumber);
+        $phoneNumber = str_replace("\n", '', $phoneNumber);
+        return $phoneNumber;
     }
 }

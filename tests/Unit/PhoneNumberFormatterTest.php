@@ -42,9 +42,9 @@ it('handles number with leading and trailing spaces', function () {
     expect(PhoneNumberFormatter::format(' +393331234567 '))->toBe('+393331234567');
 });
 
-it('adds +39 prefix to number starting with 0039', function () {
+it('replaces 00 with + in number starting with 0039', function () {
     // 0039 is a common alternate Italian prefix format - it gets +39 prepended
-    expect(PhoneNumberFormatter::format('00393331234567'))->toBe('+3900393331234567');
+    expect(PhoneNumberFormatter::format('00393331234567'))->toBe('+393331234567');
 });
 
 it('does not strip dashes from phone number', function () {
@@ -57,4 +57,20 @@ it('does not strip dots from phone number', function () {
 
 it('does not add +39 prefix to a number with prefix but without +', function() {
     expect(PhoneNumberFormatter::format('393331234567'))->toBe('+393331234567');
+});
+
+it('handles number with any witespace characters', function () {
+    expect(PhoneNumberFormatter::format(" 333\t123\n4567 "))->toBe('+393331234567');
+});
+
+it('return empty string for input with only whitespace characters', function () {
+    expect(PhoneNumberFormatter::format(" \t\n "))->toBe('');
+});
+
+it('return number containing letters if input contains letters', function () {
+    expect(PhoneNumberFormatter::format("+39a331234bc7"))->toBe('+39a331234bc7');
+});
+
+it('handles number with mixed separators and spaces', function () {
+    expect(PhoneNumberFormatter::format(" 333-123 4567 "))->toBe('+39333-1234567');
 });
