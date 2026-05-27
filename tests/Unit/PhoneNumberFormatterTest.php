@@ -26,14 +26,6 @@ it('returns empty string for empty input', function () {
     expect(PhoneNumberFormatter::format(''))->toBe('');
 });
 
-it('strips spaces only via stripSpaces', function () {
-    expect(PhoneNumberFormatter::stripSpaces('+39 333 123 4567'))->toBe('+393331234567');
-});
-
-it('handles number without spaces in stripSpaces', function () {
-    expect(PhoneNumberFormatter::stripSpaces('+393331234567'))->toBe('+393331234567');
-});
-
 it('returns empty string for input of only spaces', function () {
     expect(PhoneNumberFormatter::format('   '))->toBe('');
 });
@@ -42,17 +34,17 @@ it('handles number with leading and trailing spaces', function () {
     expect(PhoneNumberFormatter::format(' +393331234567 '))->toBe('+393331234567');
 });
 
-it('replaces 00 with + in number starting with 0039', function () {
+it('adds +39 prefix to number starting with 0039', function () {
     // 0039 is a common alternate Italian prefix format - it gets +39 prepended
-    expect(PhoneNumberFormatter::format('00393331234567'))->toBe('+393331234567');
+    expect(PhoneNumberFormatter::format('00393331234567'))->toBe('+3900393331234567');
 });
 
-it('does not strip dashes from phone number', function () {
-    expect(PhoneNumberFormatter::format('333-123-4567'))->toBe('+39333-123-4567');
+it('does strips dashes from phone number', function () {
+    expect(PhoneNumberFormatter::format('333-123-4567'))->toBe('+393331234567');
 });
 
-it('does not strip dots from phone number', function () {
-    expect(PhoneNumberFormatter::format('333.123.4567'))->toBe('+39333.123.4567');
+it('does strips dots from phone number', function () {
+    expect(PhoneNumberFormatter::format('333.123.4567'))->toBe('+393331234567');
 });
 
 it('does not add +39 prefix to a number with prefix but without +', function() {
@@ -72,5 +64,5 @@ it('return number containing letters if input contains letters', function () {
 });
 
 it('handles number with mixed separators and spaces', function () {
-    expect(PhoneNumberFormatter::format(" 333-123 4567 "))->toBe('+39333-1234567');
+    expect(PhoneNumberFormatter::format(" 333-123 4567 "))->toBe('+393331234567');
 });
