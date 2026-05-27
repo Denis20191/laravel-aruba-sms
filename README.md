@@ -213,8 +213,8 @@ PhoneNumberFormatter::format('333 123 4567');    // '+393331234567'
 PhoneNumberFormatter::format('+393331234567');   // '+393331234567' (unchanged)
 PhoneNumberFormatter::format('+447911123456');   // '+447911123456' (non-IT preserved)
 
-// Strip spaces only
-PhoneNumberFormatter::stripSpaces('+39 333 123 4567'); // '+393331234567'
+// Strip non-numeric characters
+PhoneNumberFormatter::stripNoise('+39-333 123.4567'); // '+393331234567'
 ```
 
 ## Sandbox Mode
